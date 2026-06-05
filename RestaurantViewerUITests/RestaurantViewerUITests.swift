@@ -80,7 +80,11 @@ final class RestaurantViewerUITests: XCTestCase {
         let favorite = app.buttons["favoriteButton"]
         XCTAssertTrue(favorite.waitForExistence(timeout: 5))
 
+        // Wait until the heart has settled (card entrance animation finished)
+        // before tapping, otherwise the first tap can be swallowed mid-animation.
+        XCTAssertTrue(waitUntilHittable(favorite))
         XCTAssertEqual(favorite.label, "Add to favorites")
+
         favorite.tap()
         XCTAssertTrue(waitForLabel(of: favorite, toEqual: "Remove from favorites"))
         favorite.tap()
@@ -97,6 +101,14 @@ final class RestaurantViewerUITests: XCTestCase {
 
     private func waitForLabel(of element: XCUIElement, toEqual expected: String, timeout: TimeInterval = 5) -> Bool {
         let predicate = NSPredicate(format: "label == %@", expected)
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: element)
+        return XCTWaiter().wait(for: [expectation], timeout: timeout) == .completed
+    }
+
+    /// Waits until an element is actually hittable (e.g. its entrance animation
+    /// has finished), guarding against taps being swallowed mid-transition.
+    private func waitUntilHittable(_ element: XCUIElement, timeout: TimeInterval = 5) -> Bool {
+        let predicate = NSPredicate(format: "isHittable == true")
         let expectation = XCTNSPredicateExpectation(predicate: predicate, object: element)
         return XCTWaiter().wait(for: [expectation], timeout: timeout) == .completed
     }
