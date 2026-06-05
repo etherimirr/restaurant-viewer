@@ -49,9 +49,8 @@ past the first page, search-term reset, and the favorite toggle. The app exposes
 accessibility identifiers (`topCardTitle`, `nextButton`, `previousButton`,
 `searchField`, `favoriteButton`) so assertions target the front card reliably.
 
-> Note: the project was assembled on a machine with only the Xcode Command Line
-> Tools, so the tests were written and statically checked but not executed here —
-> run them in Xcode to confirm green.
+> Verified: builds clean and all 5 UI tests pass on the iOS 18.6 simulator
+> (Xcode 16.4, iPhone 16).
 
 ## Trade-offs
 
