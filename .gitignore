@@ -1,0 +1,37 @@
+# Xcode — commit the project + shared schemes, ignore per-user state only
+build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcuserdatad/
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Packages/
+Package.pins
+Package.resolved
+.netrc
+
+# Secrets — keep the Yelp token out of the public repo (template is committed)
+**/Secrets.swift
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Bundler / CocoaPods
+Pods/
+Podfile.lock
+
+# Misc
+*.log
