@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE7100000000000000000200 /* RestaurantViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000100 /* RestaurantViewerApp.swift */; };
+		FE7100000000000000000201 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000101 /* Restaurant.swift */; };
+		FE7100000000000000000202 /* YelpSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000102 /* YelpSearchResponse.swift */; };
+		FE7100000000000000000203 /* YelpConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000103 /* YelpConfig.swift */; };
+		FE7100000000000000000204 /* YelpAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000104 /* YelpAPIClient.swift */; };
+		FE7100000000000000000205 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000105 /* LocationManager.swift */; };
+		FE7100000000000000000206 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000106 /* FavoritesStore.swift */; };
+		FE7100000000000000000207 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000107 /* Secrets.swift */; };
+		FE7100000000000000000209 /* RestaurantStackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000109 /* RestaurantStackViewModel.swift */; };
+		FE710000000000000000020A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE710000000000000000010A /* ContentView.swift */; };
+		FE710000000000000000020B /* CardStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE710000000000000000010B /* CardStackView.swift */; };
+		FE710000000000000000020C /* RestaurantCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE710000000000000000010C /* RestaurantCard.swift */; };
+		FE710000000000000000020D /* ControlBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE710000000000000000010D /* ControlBarView.swift */; };
+		FE710000000000000000020E /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE710000000000000000010E /* ErrorBannerView.swift */; };
+		FE710000000000000000020F /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE710000000000000000010F /* StarRatingView.swift */; };
+		FE7100000000000000000210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000110 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FE7100000000000000000100 /* RestaurantViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewerApp.swift; sourceTree = "<group>"; };
+		FE7100000000000000000101 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		FE7100000000000000000102 /* YelpSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchResponse.swift; sourceTree = "<group>"; };
+		FE7100000000000000000103 /* YelpConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpConfig.swift; sourceTree = "<group>"; };
+		FE7100000000000000000104 /* YelpAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIClient.swift; sourceTree = "<group>"; };
+		FE7100000000000000000105 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		FE7100000000000000000106 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStore.swift; sourceTree = "<group>"; };
+		FE7100000000000000000107 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		FE7100000000000000000108 /* Secrets.example.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.example.swift; sourceTree = "<group>"; };
+		FE7100000000000000000109 /* RestaurantStackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStackViewModel.swift; sourceTree = "<group>"; };
+		FE710000000000000000010A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FE710000000000000000010B /* CardStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackView.swift; sourceTree = "<group>"; };
+		FE710000000000000000010C /* RestaurantCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCard.swift; sourceTree = "<group>"; };
+		FE710000000000000000010D /* ControlBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
+		FE710000000000000000010E /* ErrorBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBannerView.swift; sourceTree = "<group>"; };
+		FE710000000000000000010F /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		FE7100000000000000000110 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE71000000000000000000AA /* RestaurantViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE71000000000000000000AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE71000000000000000000A2 = {
+			isa = PBXGroup;
+			children = (
+				FE71000000000000000000A3 /* RestaurantViewer */,
+				FE71000000000000000000A9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE71000000000000000000A3 /* RestaurantViewer */ = {
+			isa = PBXGroup;
+			children = (
+				FE71000000000000000000A4 /* App */,
+				FE71000000000000000000A5 /* Models */,
+				FE71000000000000000000A6 /* Services */,
+				FE71000000000000000000A7 /* ViewModels */,
+				FE71000000000000000000A8 /* Views */,
+				FE7100000000000000000110 /* Assets.xcassets */,
+			);
+			path = RestaurantViewer;
+			sourceTree = "<group>";
+		};
+		FE71000000000000000000A4 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FE7100000000000000000100 /* RestaurantViewerApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FE71000000000000000000A5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FE7100000000000000000101 /* Restaurant.swift */,
+				FE7100000000000000000102 /* YelpSearchResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FE71000000000000000000A6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FE7100000000000000000103 /* YelpConfig.swift */,
+				FE7100000000000000000104 /* YelpAPIClient.swift */,
+				FE7100000000000000000105 /* LocationManager.swift */,
+				FE7100000000000000000106 /* FavoritesStore.swift */,
+				FE7100000000000000000107 /* Secrets.swift */,
+				FE7100000000000000000108 /* Secrets.example.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		FE71000000000000000000A7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FE7100000000000000000109 /* RestaurantStackViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FE71000000000000000000A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE710000000000000000010A /* ContentView.swift */,
+				FE710000000000000000010B /* CardStackView.swift */,
+				FE710000000000000000010C /* RestaurantCard.swift */,
+				FE710000000000000000010D /* ControlBarView.swift */,
+				FE710000000000000000010E /* ErrorBannerView.swift */,
+				FE710000000000000000010F /* StarRatingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE71000000000000000000A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE71000000000000000000AA /* RestaurantViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE71000000000000000000AB /* RestaurantViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE71000000000000000000B0 /* Build configuration list for PBXNativeTarget "RestaurantViewer" */;
+			buildPhases = (
+				FE71000000000000000000AC /* Sources */,
+				FE71000000000000000000AD /* Frameworks */,
+				FE71000000000000000000AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RestaurantViewer;
+			productName = RestaurantViewer;
+			productReference = FE71000000000000000000AA /* RestaurantViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE71000000000000000000A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					FE71000000000000000000AB = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = FE71000000000000000000AF /* Build configuration list for PBXProject "RestaurantViewer" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE71000000000000000000A2;
+			productRefGroup = FE71000000000000000000A9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE71000000000000000000AB /* RestaurantViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE71000000000000000000AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE7100000000000000000210 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE71000000000000000000AC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE7100000000000000000200 /* RestaurantViewerApp.swift in Sources */,
+				FE7100000000000000000201 /* Restaurant.swift in Sources */,
+				FE7100000000000000000202 /* YelpSearchResponse.swift in Sources */,
+				FE7100000000000000000203 /* YelpConfig.swift in Sources */,
+				FE7100000000000000000204 /* YelpAPIClient.swift in Sources */,
+				FE7100000000000000000205 /* LocationManager.swift in Sources */,
+				FE7100000000000000000206 /* FavoritesStore.swift in Sources */,
+				FE7100000000000000000207 /* Secrets.swift in Sources */,
+				FE7100000000000000000209 /* RestaurantStackViewModel.swift in Sources */,
+				FE710000000000000000020A /* ContentView.swift in Sources */,
+				FE710000000000000000020B /* CardStackView.swift in Sources */,
+				FE710000000000000000020C /* RestaurantCard.swift in Sources */,
+				FE710000000000000000020D /* ControlBarView.swift in Sources */,
+				FE710000000000000000020E /* ErrorBannerView.swift in Sources */,
+				FE710000000000000000020F /* StarRatingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FE71000000000000000000B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FE71000000000000000000B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FE71000000000000000000B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Restaurant Viewer uses your location to show restaurants near you on Yelp.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations~ipad" = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fini.RestaurantViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FE71000000000000000000B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Restaurant Viewer uses your location to show restaurants near you on Yelp.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations~ipad" = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fini.RestaurantViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE71000000000000000000AF /* Build configuration list for PBXProject "RestaurantViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE71000000000000000000B1 /* Debug */,
+				FE71000000000000000000B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE71000000000000000000B0 /* Build configuration list for PBXNativeTarget "RestaurantViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE71000000000000000000B3 /* Debug */,
+				FE71000000000000000000B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE71000000000000000000A1 /* Project object */;
+}
