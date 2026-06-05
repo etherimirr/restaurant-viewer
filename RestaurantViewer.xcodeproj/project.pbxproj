@@ -23,6 +23,9 @@
 		FE710000000000000000020E /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE710000000000000000010E /* ErrorBannerView.swift */; };
 		FE710000000000000000020F /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE710000000000000000010F /* StarRatingView.swift */; };
 		FE7100000000000000000210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000110 /* Assets.xcassets */; };
+		FE7100000000000000000211 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000111 /* AppEnvironment.swift */; };
+		FE7100000000000000000212 /* UITestMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000112 /* UITestMocks.swift */; };
+		FE7100000000000000000213 /* RestaurantViewerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7100000000000000000113 /* RestaurantViewerUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,11 +46,22 @@
 		FE710000000000000000010E /* ErrorBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorBannerView.swift; sourceTree = "<group>"; };
 		FE710000000000000000010F /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		FE7100000000000000000110 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE7100000000000000000111 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		FE7100000000000000000112 /* UITestMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestMocks.swift; sourceTree = "<group>"; };
+		FE7100000000000000000113 /* RestaurantViewerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantViewerUITests.swift; sourceTree = "<group>"; };
 		FE71000000000000000000AA /* RestaurantViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE71000000000000000000CA /* RestaurantViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RestaurantViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		FE71000000000000000000AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE71000000000000000000C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -61,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				FE71000000000000000000A3 /* RestaurantViewer */,
+				FE71000000000000000000C9 /* RestaurantViewerUITests */,
 				FE71000000000000000000A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				FE7100000000000000000100 /* RestaurantViewerApp.swift */,
+				FE7100000000000000000111 /* AppEnvironment.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -104,6 +120,7 @@
 				FE7100000000000000000106 /* FavoritesStore.swift */,
 				FE7100000000000000000107 /* Secrets.swift */,
 				FE7100000000000000000108 /* Secrets.example.swift */,
+				FE7100000000000000000112 /* UITestMocks.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -133,8 +150,17 @@
 			isa = PBXGroup;
 			children = (
 				FE71000000000000000000AA /* RestaurantViewer.app */,
+				FE71000000000000000000CA /* RestaurantViewerUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FE71000000000000000000C9 /* RestaurantViewerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FE7100000000000000000113 /* RestaurantViewerUITests.swift */,
+			);
+			path = RestaurantViewerUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +183,23 @@
 			productReference = FE71000000000000000000AA /* RestaurantViewer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FE71000000000000000000C1 /* RestaurantViewerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE71000000000000000000C4 /* Build configuration list for PBXNativeTarget "RestaurantViewerUITests" */;
+			buildPhases = (
+				FE71000000000000000000C2 /* Sources */,
+				FE71000000000000000000C3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE71000000000000000000C7 /* PBXTargetDependency */,
+			);
+			name = RestaurantViewerUITests;
+			productName = RestaurantViewerUITests;
+			productReference = FE71000000000000000000CA /* RestaurantViewerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -169,6 +212,10 @@
 				TargetAttributes = {
 					FE71000000000000000000AB = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					FE71000000000000000000C1 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = FE71000000000000000000AB;
 					};
 				};
 			};
@@ -186,6 +233,7 @@
 			projectRoot = "";
 			targets = (
 				FE71000000000000000000AB /* RestaurantViewer */,
+				FE71000000000000000000C1 /* RestaurantViewerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -207,6 +255,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE7100000000000000000200 /* RestaurantViewerApp.swift in Sources */,
+				FE7100000000000000000211 /* AppEnvironment.swift in Sources */,
+				FE7100000000000000000212 /* UITestMocks.swift in Sources */,
 				FE7100000000000000000201 /* Restaurant.swift in Sources */,
 				FE7100000000000000000202 /* YelpSearchResponse.swift in Sources */,
 				FE7100000000000000000203 /* YelpConfig.swift in Sources */,
@@ -224,7 +274,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FE71000000000000000000C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE7100000000000000000213 /* RestaurantViewerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXContainerItemProxy section */
+		FE71000000000000000000C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE71000000000000000000A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE71000000000000000000AB;
+			remoteInfo = RestaurantViewer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXTargetDependency section */
+		FE71000000000000000000C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE71000000000000000000AB /* RestaurantViewer */;
+			targetProxy = FE71000000000000000000C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FE71000000000000000000B1 /* Debug */ = {
@@ -404,6 +480,52 @@
 			};
 			name = Release;
 		};
+		FE71000000000000000000C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fini.RestaurantViewerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RestaurantViewer;
+			};
+			name = Debug;
+		};
+		FE71000000000000000000C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fini.RestaurantViewerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RestaurantViewer;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -421,6 +543,15 @@
 			buildConfigurations = (
 				FE71000000000000000000B3 /* Debug */,
 				FE71000000000000000000B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE71000000000000000000C4 /* Build configuration list for PBXNativeTarget "RestaurantViewerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE71000000000000000000C5 /* Debug */,
+				FE71000000000000000000C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
