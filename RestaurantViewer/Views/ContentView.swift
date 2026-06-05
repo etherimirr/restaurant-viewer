@@ -2,7 +2,13 @@ import SwiftUI
 
 /// Root view. Owns the single `RestaurantStackViewModel` instance for the app.
 struct ContentView: View {
-    @StateObject private var viewModel = RestaurantStackViewModel()
+    @StateObject private var viewModel: RestaurantStackViewModel
+
+    /// Defaults to the app environment (live, or mock under UI tests). Tests and
+    /// previews can inject a view model directly.
+    init(viewModel: @autoclosure @escaping () -> RestaurantStackViewModel = AppEnvironment.makeRootViewModel()) {
+        _viewModel = StateObject(wrappedValue: viewModel())
+    }
 
     var body: some View {
         ZStack(alignment: .top) {

@@ -41,6 +41,7 @@ struct ControlBarView: View {
                 .autocorrectionDisabled()
                 .submitLabel(.search)
                 .onSubmit { commitSearch() }
+                .accessibilityIdentifier("searchField")
             if !draftTerm.isEmpty {
                 Button {
                     draftTerm = ""
@@ -78,6 +79,7 @@ struct ControlBarView: View {
         .buttonStyle(.plain)
         .disabled(!enabled)
         .accessibilityLabel(label)
+        .accessibilityIdentifier(label.lowercased() + "Button")
     }
 
     private func commitSearch() {

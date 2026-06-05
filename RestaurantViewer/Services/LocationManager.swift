@@ -1,13 +1,20 @@
 import Foundation
 import CoreLocation
 
+/// One-shot source of the device coordinate. Protocol-based so the view model
+/// can be driven by a stub in tests (and so the app can inject a fixed
+/// coordinate under UI tests without triggering a real permission prompt).
+protocol LocationProviding {
+    func currentCoordinate() async throws -> CLLocationCoordinate2D
+}
+
 /// Wraps CLLocationManager behind an async API.
 ///
 /// Trade-off: a real production manager would publish location updates
 /// continuously (for distance recalc, etc.). For this take-home we only
 /// need the initial coordinate, so we resolve a single continuation
 /// when the first authorized fix arrives.
-final class LocationManager: NSObject, CLLocationManagerDelegate {
+final class LocationManager: NSObject, CLLocationManagerDelegate, LocationProviding {
 
     enum LocationError: Error, LocalizedError {
         case denied

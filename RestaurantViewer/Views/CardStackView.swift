@@ -51,7 +51,8 @@ struct CardStackView: View {
         RestaurantCard(
             restaurant: restaurant,
             isFavorite: viewModel.isFavorite(restaurant.id),
-            onToggleFavorite: { viewModel.toggleFavorite(restaurant.id) }
+            onToggleFavorite: { viewModel.toggleFavorite(restaurant.id) },
+            isTopCard: stackOffset == 0
         )
         .frame(width: width, height: height)
         .scaleEffect(scale)

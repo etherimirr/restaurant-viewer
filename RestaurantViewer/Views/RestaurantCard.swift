@@ -7,6 +7,10 @@ struct RestaurantCard: View {
     let isFavorite: Bool
     let onToggleFavorite: () -> Void
 
+    /// Only the top card carries stable identifiers (`topCardTitle`,
+    /// `favoriteButton`) so UI tests can assert against the front card.
+    var isTopCard: Bool = false
+
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             backgroundImage
@@ -24,6 +28,7 @@ struct RestaurantCard: View {
                         .font(.title2.weight(.bold))
                         .foregroundStyle(.white)
                         .lineLimit(2)
+                        .accessibilityIdentifier(isTopCard ? "topCardTitle" : "cardTitle-\(restaurant.id)")
                     Spacer(minLength: 12)
                     favoriteButton
                 }
@@ -100,6 +105,7 @@ struct RestaurantCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(isFavorite ? "Remove from favorites" : "Add to favorites")
+        .accessibilityIdentifier(isTopCard ? "favoriteButton" : "favoriteButton-\(restaurant.id)")
     }
 }
 
@@ -115,7 +121,8 @@ struct RestaurantCard: View {
             distanceMeters: 432
         ),
         isFavorite: true,
-        onToggleFavorite: {}
+        onToggleFavorite: {},
+        isTopCard: true
     )
     .padding()
     .frame(height: 480)

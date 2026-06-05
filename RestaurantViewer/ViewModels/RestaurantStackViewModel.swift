@@ -30,7 +30,7 @@ final class RestaurantStackViewModel: ObservableObject {
     // MARK: - Dependencies
 
     private let api: YelpAPIClient
-    private let location: LocationManager
+    private let location: LocationProviding
     private let favorites: FavoritesStoring
 
     // MARK: - Pagination + location cache
@@ -44,7 +44,7 @@ final class RestaurantStackViewModel: ObservableObject {
 
     init(
         api: YelpAPIClient = LiveYelpAPIClient(),
-        location: LocationManager = LocationManager(),
+        location: LocationProviding = LocationManager(),
         favorites: FavoritesStoring = UserDefaultsFavoritesStore()
     ) {
         self.api = api
