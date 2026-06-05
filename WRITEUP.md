@@ -38,7 +38,7 @@ Runner-up: the **continuation pattern for `CLLocationManager`**. Bridging the de
 
 ### Skipped or done quickly
 
-- **No unit tests.** The protocol abstractions are there so tests can drop in, but I did not write them. With another hour I would mock the Yelp client and assert pagination + dedupe behavior, and mock favorites store for toggle persistence.
+- **Unit tests, initially skipped — then added an E2E suite.** In the first pass I left tests out and relied on the protocol abstractions to make them droppable later. I since added an **XCUITest end-to-end suite** (see below) that exercises the real UI against injected mocks. I would still add focused view-model unit tests next (pagination math + dedupe in isolation), but the E2E pass covers the integrated behavior end-to-end.
 - **No image cache.** SwiftUI's `AsyncImage` re-fetches on every appear. For an endless feed in production I would swap in `Nuke` or `SDWebImage` (or a tiny `NSCache` wrapper) for memory + disk caching.
 - **No retry / backoff on 429.** Errors bubble to a banner; I did not implement exponential backoff. With more time I would handle rate-limit responses explicitly.
 - **No analytics, telemetry, or crash reporting.** Out of scope for a take-home; for production the next file I would add is a thin `Telemetry` protocol wired into the view model state transitions.
@@ -70,6 +70,25 @@ A few smaller polish items that were not asked for:
 - **Empty / loading / error states** — never a blank screen.
 - **Distance shown in miles** under the address, derived from the `distance` field Yelp returns (meters → miles).
 - **Half-star rendering** in `StarRatingView` so a 4.5 rating actually shows the half star instead of rounding.
+
+### End-to-end UI tests (added after the initial pass)
+
+`RestaurantViewerUITests/` is an XCUITest target that drives the shipping app in
+the simulator. The app accepts a `-uitest-mock` launch argument; when present,
+`AppEnvironment` injects a deterministic `MockYelpAPIClient` (ordered cards like
+"Bistro 01", "Bistro 02", …), a `StubLocationProvider` (fixed coordinate, no
+permission prompt), and an `InMemoryFavoritesStore`. This made the integrated
+flows assertable without flaky network/location dependencies.
+
+To support black-box assertions I made two small, non-invasive changes:
+- Extracted a `LocationProviding` protocol so location is injectable (it was a
+  concrete type before).
+- Added accessibility identifiers, and tagged only the **front** card with
+  `topCardTitle` / `favoriteButton` so a test can tell which card is on top of
+  the stack — otherwise every rendered card shares the same name in the tree.
+
+The five tests cover: first card loads, Next/Previous navigation, seamless
+pagination past page one, search-term reset, and favorite toggle. Run with ⌘U.
 
 ### Things I would do next
 

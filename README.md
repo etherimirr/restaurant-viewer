@@ -36,6 +36,23 @@ Card-based viewer for restaurants near the device, backed by Yelp.
 | **BONUS** query input | ✅ (search bar in ControlBarView) |
 | **BONUS** favorites toggle + persist | ✅ (UserDefaults) |
 
+## Testing
+
+End-to-end UI tests live in `RestaurantViewerUITests/` (XCUITest). They launch the
+real app with the `-uitest-mock` launch argument, which makes `AppEnvironment`
+inject deterministic dependencies — a mock Yelp client, a stub location provider,
+and an in-memory favorites store — so the tests never touch the network or trigger
+a location prompt. Run them with **⌘U** (or **Product → Test**) on any simulator.
+
+Covered flows: initial card load, Next/Previous navigation, seamless pagination
+past the first page, search-term reset, and the favorite toggle. The app exposes
+accessibility identifiers (`topCardTitle`, `nextButton`, `previousButton`,
+`searchField`, `favoriteButton`) so assertions target the front card reliably.
+
+> Note: the project was assembled on a machine with only the Xcode Command Line
+> Tools, so the tests were written and statically checked but not executed here —
+> run them in Xcode to confirm green.
+
 ## Trade-offs
 
 See `design.md` and `WRITEUP.md` for full reasoning. Highlights:
