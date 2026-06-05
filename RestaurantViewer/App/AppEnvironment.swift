@@ -8,6 +8,7 @@ import Foundation
 enum AppEnvironment {
     static let uiTestMockArgument = "-uitest-mock"
 
+    @MainActor
     static func makeRootViewModel() -> RestaurantStackViewModel {
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains(uiTestMockArgument) {

@@ -21,15 +21,19 @@ struct MockYelpAPIClient: YelpAPIClient {
         guard offset < total else { return [] }
         let end = min(offset + limit, total)
         let label = Self.displayLabel(for: term)
-        return (offset..<end).map { i in
-            Restaurant(
+        return (offset..<end).map { i -> Restaurant in
+            let number: String = String(format: "%02d", i + 1)
+            let rating: Double = Double(i % 5) + 0.5
+            let reviews: Int = 100 + i
+            let distance: Double = Double((i + 1) * 100)
+            return Restaurant(
                 id: "mock-\(label)-\(i)",
-                name: "\(label) \(String(format: "%02d", i + 1))",
+                name: "\(label) \(number)",
                 imageURL: nil, // nil -> letter placeholder, so tests never hit the network
-                rating: Double((i % 5)) + 0.5,
-                reviewCount: 100 + i,
+                rating: rating,
+                reviewCount: reviews,
                 address: "\(i + 1) Test Street",
-                distanceMeters: Double((i + 1) * 100)
+                distanceMeters: distance
             )
         }
     }
