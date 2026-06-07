@@ -1,4 +1,4 @@
-# Restaurant Viewer — Fini iOS Take-Home
+# Restaurant Viewer (Fini iOS Take-Home)
 
 Card-based viewer for restaurants near the device, backed by Yelp.
 
@@ -11,7 +11,7 @@ Card-based viewer for restaurants near the device, backed by Yelp.
    ```
    `Secrets.swift` is gitignored, so the token never lands in this public repo. The project will not compile until this file exists (the build references `Secrets.yelpBearerToken`).
 2. **Open & run.** Open `RestaurantViewer.xcodeproj` in Xcode 15+, pick an iPhone simulator, and ⌘R. The deployment target is **iOS 16.0** (uses `AsyncImage`, `task`, `submitLabel`, and modern SwiftUI layout). The location-usage string and supported orientations are set via build settings (`GENERATE_INFOPLIST_FILE`), so there is no manual Info.plist step.
-3. In the simulator, set **Features → Location → Custom Location** to a real lat/lon, or just tap "Don't Allow" — the app falls back to NYC so the demo still works.
+3. In the simulator, set **Features → Location → Custom Location** to a real lat/lon, or just tap "Don't Allow" and the app falls back to NYC so the demo still works.
 
 ## Architecture
 
@@ -40,9 +40,9 @@ Card-based viewer for restaurants near the device, backed by Yelp.
 
 End-to-end UI tests live in `RestaurantViewerUITests/` (XCUITest). They launch the
 real app with the `-uitest-mock` launch argument, which makes `AppEnvironment`
-inject deterministic dependencies — a mock Yelp client, a stub location provider,
-and an in-memory favorites store — so the tests never touch the network or trigger
-a location prompt. Run them with **⌘U** (or **Product → Test**) on any simulator.
+inject deterministic dependencies (a mock Yelp client, a stub location provider,
+and an in-memory favorites store) so the tests never touch the network or trigger
+a location prompt. Run them with Cmd-U (or **Product → Test**) on any simulator.
 
 Covered flows: initial card load, Next/Previous navigation, seamless pagination
 past the first page, search-term reset, and the favorite toggle. The app exposes
@@ -56,11 +56,11 @@ accessibility identifiers (`topCardTitle`, `nextButton`, `previousButton`,
 
 See `design.md` and `WRITEUP.md` for full reasoning. Highlights:
 
-- **SwiftUI over UIKit** for speed of build + clean animation API.
-- **Async/await over Combine** — sufficient for this scope.
-- **Top + 2 cards rendered** (not full collection view) — avoids memory churn for an endless feed.
-- **NYC fallback** when location is denied — keeps the demo usable for reviewers.
-- **No unit tests** in the 3-hour budget; services are protocol-backed so tests can drop in.
+- SwiftUI over UIKit, for build speed and a clean animation API.
+- Async/await over Combine, since the data flow here is linear.
+- Only the top card plus two behind it are rendered (not a full collection view), which avoids memory churn in an endless feed.
+- NYC fallback when location is denied, so the demo stays usable for reviewers.
+- The core app was built in the timebox without tests; the XCUITest suite (above) was added afterward in the extra time the brief allows.
 
 ## File Layout
 
@@ -75,7 +75,7 @@ RestaurantViewer/
 ├── Services/
 │   ├── YelpConfig.swift                # endpoint + paging constants; reads token from Secrets
 │   ├── Secrets.example.swift           # token template (committed)
-│   ├── Secrets.swift                   # real token (gitignored — create from template)
+│   ├── Secrets.swift                   # real token (gitignored; create from template)
 │   ├── YelpAPIClient.swift             # async URLSession client
 │   ├── LocationManager.swift           # async wrapper around CLLocationManager
 │   └── FavoritesStore.swift            # UserDefaults
@@ -89,16 +89,8 @@ RestaurantViewer/
     └── StarRatingView.swift
 ```
 
-## How to submit
+## Notes
 
-The assignment asks for a **view-only Google Doc, public GitHub link, or similar file link**.
+The commit history is intentionally incremental and follows the build order (scaffold, models, networking, location, view model, views, bonuses, then tests and project setup), so it traces how the app came together.
 
-This repo is already a git repository with incremental commits that trace the build order (scaffold → models → networking → location → view model → views → bonuses → project/docs). To publish:
-
-1. Create a fresh **public** GitHub repo and push:
-   ```sh
-   git remote add origin <your-public-repo-url>
-   git push -u origin main
-   ```
-2. Confirm `Secrets.swift` is **not** in the pushed tree (it is gitignored; only `Secrets.example.swift` should appear).
-3. Send the repo URL to Ashley with `WRITEUP.md` linked or pasted into the email.
+The Yelp token is kept out of the repo: `Secrets.swift` is gitignored, and only the `Secrets.example.swift` template is committed. Copy the template and paste the token to build (see Setup above).

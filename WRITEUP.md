@@ -1,102 +1,47 @@
-# Restaurant Viewer — Write-Up
+# Write-Up
 
-> Per Fini's assignment, this write-up addresses three questions. Time spent on this write-up is not counted against the 3-hour budget.
+A few notes on how I approached this. (Per the brief, the time on this write-up isn't counted against the budget.)
 
----
+## 1. How long did you spend, and what was the hardest part?
 
-## 1. How long did you spend working on the problem? What did you find to be the most difficult part?
+I spent about three hours on the core app: reading the brief and sketching the architecture, then building it out, the Yelp client and models, the Core Location wrapper, the view model with pagination, and the card UI with the slide animation. After that I put in some extra time on the things the brief says you can add if you have any left over: a UI test suite, the landscape layout, and getting the project building cleanly in Xcode. Those are in question 3.
 
-**Total coding time**: ~2.5 hours.
+The hardest part was the card-stack animation. The idea is simple, the top card slides off to the left and the next one moves forward, but getting SwiftUI to animate it without flickering took some trial and error. The trouble was the interplay between zIndex, the transition, and which value the animation is keyed on. What finally worked was rendering only the top card plus the two behind it (topIndex through topIndex+2) and animating the index itself, which keeps SwiftUI's diffing predictable.
 
-Rough breakdown:
+The other awkward piece was wrapping CLLocationManager in an async call. Its delegate callbacks have to be bridged to a continuation that resumes exactly once, and you have to be careful with the "permission not decided yet, then prompt, then first fix" path so you never resume it twice.
 
-| Phase | Time |
-|---|---|
-| Read assignment, sketch architecture, decide on SwiftUI + MVVM + async/await | 15 min |
-| Project skeleton, `YelpConfig`, models, wire-format mapping | 20 min |
-| `LocationManager` (async wrapper around `CLLocationManager`) | 20 min |
-| `YelpAPIClient` (URLSession, error mapping, pagination math) | 25 min |
-| `RestaurantStackViewModel` (state, prefetch trigger, search reset, favorites) | 30 min |
-| Card view, stack layering, animation, control bar | 40 min |
-| Error banner, empty state, polish | 15 min |
+## 2. What trade-offs did you make?
 
-**Most difficult part**: the **card-stack animation**. Conceptually simple — top card slides left, next card scales up into place — but getting the `zIndex` math, the `transition`, and the `.animation(_:value:)` triggers to cooperate without flickering took the longest. I landed on rendering `topIndex...topIndex+2` and animating the index change, which keeps SwiftUI's diffing predictable.
+Things I deliberately spent time on:
 
-Runner-up: the **continuation pattern for `CLLocationManager`**. Bridging the delegate-callback world into an async API while handling the "authorization not yet determined → prompt → first fix" flow needs care so the continuation is resumed exactly once.
+- I put the Yelp client and the favorites store behind protocols. That's slightly more than a three-hour toy needs, but the brief says to treat it like production code, and it's cheap to do. It also made the app testable later on.
+- Pagination has a real edge case: Yelp won't let you page past offset 240. The view model tracks that and just stops fetching, instead of erroring or hammering the API.
+- If location permission is denied, the app falls back to NYC and shows a small dismissible banner, so a reviewer who taps "Don't Allow" still gets a working app.
+- Yelp occasionally returns the same place on two different pages, so I dedupe by id before appending.
 
----
+Things I skipped or kept quick:
 
-## 2. What trade-offs did you make? What did you choose to spend time on, and what did you choose to ignore or do quickly for the sake of completing the project?
+- No image caching. AsyncImage refetches on every appear; in production I'd drop in something like Nuke or a small NSCache wrapper.
+- No retry/backoff on a 429. For now errors just surface in the banner.
+- No analytics, and no detail screen yet. Tapping a card doesn't do anything; a detail view with a map, hours, and tap-to-call would be the obvious next screen.
+- Accessibility is labels-only. I added labels on the heart and the rating but didn't do a full Accessibility Inspector pass.
 
-### Spent meaningful time on
+On the two framework calls: I went with SwiftUI because for a two-or-three-card stack with a button-driven slide, the declarative layout and the built-in AsyncImage are just faster than hand-wiring UICollectionView cells and image loading. UIKit would give finer gesture control, but the brief only asks for button dismissal. And I used async/await rather than Combine because the flow is linear (get location, fetch a page, append), so Combine would have been more boilerplate for no real benefit here.
 
-- **Service abstraction.** `YelpAPIClient` and `FavoritesStoring` are protocols, not concrete types. This is mild over-engineering for a 3-hour take-home, but the JD called out "code as though it would be productionized," and it costs only a few minutes to swap a protocol header in.
-- **Pagination edge cases.** Yelp's `/businesses/search` caps `offset + limit ≤ 240`. The view model tracks `didReachEndOfYelp` and silently stops paging, rather than crashing or repeatedly hammering the API.
-- **Location fallback.** If permission is denied, the app falls back to NYC and shows a non-blocking banner. This keeps the reviewer's experience smooth even if they tap "Don't allow" on the simulator prompt.
-- **Animation polish.** Cards behind the top get a slight scale + Y offset for depth, and the dismiss animation uses `easeOut` over 0.35s so it feels intentional rather than abrupt.
-- **Dedupe by ID across pages.** Yelp occasionally returns overlap when paging; the view model filters duplicates before append.
+## 3. What did you add with the extra time?
 
-### Skipped or done quickly
+All three bonuses are in:
 
-- **Unit tests, initially skipped — then added an E2E suite.** In the first pass I left tests out and relied on the protocol abstractions to make them droppable later. I since added an **XCUITest end-to-end suite** (see below) that exercises the real UI against injected mocks. I would still add focused view-model unit tests next (pagination math + dedupe in isolation), but the E2E pass covers the integrated behavior end-to-end.
-- **No image cache.** SwiftUI's `AsyncImage` re-fetches on every appear. For an endless feed in production I would swap in `Nuke` or `SDWebImage` (or a tiny `NSCache` wrapper) for memory + disk caching.
-- **No retry / backoff on 429.** Errors bubble to a banner; I did not implement exponential backoff. With more time I would handle rate-limit responses explicitly.
-- **No analytics, telemetry, or crash reporting.** Out of scope for a take-home; for production the next file I would add is a thin `Telemetry` protocol wired into the view model state transitions.
-- **No deep link or detail view.** Tapping a card does nothing. For Fini's "playground" framing I would route to a detail screen with map + hours + tap-to-call, but that's a separate sprint.
-- **No localization or accessibility audit beyond labels.** I added `accessibilityLabel` on the heart button and the rating view, but I did not run an Accessibility Inspector pass.
+- Landscape. The card sizes off GeometryReader rather than fixed numbers, and the layout switches to a side-by-side arrangement when the device is wide (card on the left, title and controls on the right) so nothing overlaps. I caught and fixed a bug here where the title and the card caption were getting clipped in landscape.
+- Search. The control bar has a search field; submitting a new term clears the stack and refetches from the first page.
+- Favorites. Each card has a heart that toggles a favorite, stored as a set of Yelp ids in UserDefaults so it survives relaunches.
 
-### Why SwiftUI over UIKit
+A few smaller things I added that weren't asked for: a gradient at the bottom of each card so the text stays readable over any photo, a letter placeholder when an image is missing or fails to load, proper loading/empty/error states instead of a blank screen, distance shown in miles, and half-star ratings so a 4.5 actually shows a half star.
 
-For a card stack of 2-3 visible cards with simple slide animation, SwiftUI's declarative model and `AsyncImage` save real time over hand-wired `UICollectionView` cells and image loaders. UIKit would have given me more fine-grained gesture control (e.g., swipe-to-dismiss), but the assignment only specifies button-driven dismissal, so SwiftUI wins on time-to-build.
+I also wrote an XCUITest suite (five tests) that drives the real app: first card loads, next/previous, pagination past the first page, search reset, and the favorite toggle. To make that work without depending on the network, I added a launch flag that swaps in a mock Yelp client and a fixed location, and I tagged the front card with accessibility identifiers so a test can tell which card is on top of the stack. The suite passes on the iOS 18.6 simulator.
 
-### Why async/await over Combine
+If this were going further, the next things I'd pick up are an image cache, view-model unit tests for the pagination and dedupe logic on their own, a restaurant detail screen, swipe gestures alongside the buttons, and 429 backoff.
 
-Same reasoning: the data flow is "fetch coordinates → fetch page → append," which is naturally linear. Combine is more powerful for multi-stream reactive UIs, but it would have added boilerplate without buying me anything here.
+## Note on the requirements
 
----
-
-## 3. If you finished with extra time, what improvements did you make that go above and beyond the requirements?
-
-All three bonuses are implemented:
-
-- **Landscape mode** — sizes are derived via `GeometryReader` instead of hard-coded constants, so the card stack reflows automatically. The deployment target is iOS 16+ so I lean on SwiftUI's adaptive layout rather than fighting Auto Layout.
-- **Query input** — `ControlBarView` has a search bar bound to a local `@State` draft term. Tapping Return (`.submitLabel(.search)`) commits the term: the view model wipes the stack, resets `topIndex` and `nextOffset`, and refetches from page 0 with the new `term`.
-- **Favorites toggle + persistence** — every card has a heart button that calls back into `toggleFavorite(_:)`. The view model keeps a `Set<String>` of Yelp IDs, persisted via `FavoritesStoring` (currently a `UserDefaults` implementation). The set is loaded in `init` so favorites survive across launches.
-
-A few smaller polish items that were not asked for:
-
-- **Gradient scrim** at the bottom of every card so the text remains legible regardless of the underlying image.
-- **Placeholder image** with the restaurant's first letter on a warm gradient if Yelp's image URL is missing or fails to load.
-- **Empty / loading / error states** — never a blank screen.
-- **Distance shown in miles** under the address, derived from the `distance` field Yelp returns (meters → miles).
-- **Half-star rendering** in `StarRatingView` so a 4.5 rating actually shows the half star instead of rounding.
-
-### End-to-end UI tests (added after the initial pass)
-
-`RestaurantViewerUITests/` is an XCUITest target that drives the shipping app in
-the simulator. The app accepts a `-uitest-mock` launch argument; when present,
-`AppEnvironment` injects a deterministic `MockYelpAPIClient` (ordered cards like
-"Bistro 01", "Bistro 02", …), a `StubLocationProvider` (fixed coordinate, no
-permission prompt), and an `InMemoryFavoritesStore`. This made the integrated
-flows assertable without flaky network/location dependencies.
-
-To support black-box assertions I made two small, non-invasive changes:
-- Extracted a `LocationProviding` protocol so location is injectable (it was a
-  concrete type before).
-- Added accessibility identifiers, and tagged only the **front** card with
-  `topCardTitle` / `favoriteButton` so a test can tell which card is on top of
-  the stack — otherwise every rendered card shares the same name in the tree.
-
-The five tests cover: first card loads, Next/Previous navigation, seamless
-pagination past page one, search-term reset, and favorite toggle. Run with ⌘U.
-
-### Things I would do next
-
-If Fini ran this for real beyond the take-home:
-
-1. **Image caching** layer (Nuke or NSCache wrapper).
-2. **Unit tests** on `RestaurantStackViewModel` using a mock `YelpAPIClient` and `FavoritesStore` — pagination trigger, dedupe, search reset, and favorites persistence are the four test cases that pay back the abstraction work.
-3. **Restaurant detail view** with map, hours, and "open in Yelp" deeplink.
-4. **Swipe gestures** in addition to the button-driven flow.
-5. **Rate-limit handling** with exponential backoff on 429s.
-6. **Snapshot tests** for the card view so visual regressions surface in CI.
+The requirements list mentions Android (SDK >= 23) alongside iOS. I read that as the shared cross-platform wording, since the same brief covers both tracks. This is the iOS submission, so it covers iPhone (including Plus sizes) and adapts across screen sizes and orientation.
